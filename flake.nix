@@ -44,7 +44,7 @@
           else
             throw "Unsupported combination of types: ${builtins.typeOf l} and ${builtins.typeOf r}";
 
-        mergeEnvs = lib.fold (lib.mergeAttrsWithFunc mergeAttribute) {};
+        mergeEnvs = lib.foldr (lib.mergeAttrsWithFunc mergeAttribute) {};
 
         # Create a PHP package from the selected PHP package, with some extra extensions enabled.
         php = phps.packages.${system}.${matrix.phpPackage}.withExtensions ({ enabled, all }: with all; enabled ++ [
