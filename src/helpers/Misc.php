@@ -29,18 +29,16 @@ final class Misc {
      * Callable transformations will transform the compared values and then compare them,
      * other types will be used as keys to access array array values to be compared.
      *
-     * @param callable|array-key|array{callable|array-key, self::ORDER_*} ...$transformations
+     * @param array{0: callable|array-key, 1?: self::ORDER_*} ...$transformations
      *
      * @return callable(mixed, mixed): (self::CMP_*) comparator
      */
-    public static function compareBy(...$transformations): callable {
+    public static function compareBy(array ...$transformations): callable {
         if (count($transformations) > 0) {
             return function(array $a, array $b) use ($transformations) {
                 foreach ($transformations as $transformation) {
-                    $order = self::ORDER_ASC;
-                    if (is_array($transformation)) {
-                        [$transformation, $order] = $transformation;
-                    }
+                    [$transformation, $order] = $transformation + [null, self::ORDER_ASC];
+
                     if (is_callable($transformation)) {
                         $comparison = $transformation($a) <=> $transformation($b);
                     } else {

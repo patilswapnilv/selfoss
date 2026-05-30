@@ -98,7 +98,7 @@ final class ImageUtils {
             ],
 
             // and finally by order to make the sorting stable
-            'order'
+            ['order']
         ));
 
         return array_map(
