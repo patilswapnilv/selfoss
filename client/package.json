@@ -14,7 +14,7 @@
     "classnames": "^2.2.6",
     "core-js": "^3.2.1",
     "dexie": "^4.0.0",
-    "focus-trap": "^7.0.0",
+    "focus-trap": "^8.2.1",
     "form-urlencoded": "^6.0.0",
     "html-escaper": "^3.0.0",
     "lodash-es": "^4.17.21",
