@@ -32,7 +32,7 @@
     "fix:helpers:cs": "black utils/ tests/",
     "install-dependencies": "npm run install-dependencies:client && npm run install-dependencies:server",
     "install-dependencies:client": "npm install --include=dev --prefix client/",
-    "install-dependencies:server": "composer install --dev",
+    "install-dependencies:server": "composer install",
     "test:server": "composer run-script test",
     "test:integration": "python3 tests/integration/run.py",
     "postinstall": "npm run install-dependencies"
