@@ -12,6 +12,7 @@ import { LoadingState } from '../requests/LoadingState';
 import { useAllowedToWrite } from '../helpers/authorizations';
 import { LocalizationContext } from '../helpers/i18n';
 import { NavSource, NavTag } from '../requests/items';
+import { useLocation } from '../helpers/uri';
 
 type NavigationProps = {
     entriesPage: EntriesPage | null;
@@ -59,6 +60,10 @@ export default function Navigation(props: NavigationProps): React.JSX.Element {
     const _ = use(LocalizationContext);
 
     const canWrite = useAllowedToWrite();
+
+    const location = useLocation();
+    const queryString = new URLSearchParams(location.search);
+    const initialSearchText = queryString.get('search') ?? '';
 
     return (
         <>
@@ -138,6 +143,8 @@ export default function Navigation(props: NavigationProps): React.JSX.Element {
             <NavSearch
                 setNavExpanded={setNavExpanded}
                 offlineState={offlineState}
+                key={initialSearchText}
+                initialSearchText={initialSearchText}
             />
 
             <NavToolBar reloadAll={reloadAll} setNavExpanded={setNavExpanded} />

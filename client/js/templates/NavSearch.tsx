@@ -1,7 +1,6 @@
 import React, {
     useCallback,
     use,
-    useEffect,
     useRef,
     useState,
     RefObject,
@@ -97,10 +96,11 @@ function handleRemove({
 type NavSearchProps = {
     setNavExpanded: React.Dispatch<React.SetStateAction<boolean>>;
     offlineState: boolean;
+    initialSearchText: string;
 };
 
 export default function NavSearch(props: NavSearchProps): React.JSX.Element {
-    const { setNavExpanded, offlineState } = props;
+    const { setNavExpanded, offlineState, initialSearchText } = props;
 
     const [active, setActive] = useState(false);
 
@@ -111,14 +111,7 @@ export default function NavSearch(props: NavSearchProps): React.JSX.Element {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const queryString = new URLSearchParams(location.search);
-    const oldTerm = queryString.get('search') ?? '';
-    const [searchText, setSearchText] = useState('');
-
-    useEffect(() => {
-        // Update the search term when the query string changes.
-        setSearchText(oldTerm);
-    }, [oldTerm]);
+    const [searchText, setSearchText] = useState(initialSearchText);
 
     const termOnKeyUp = useCallback(
         (event: KeyboardEvent<HTMLInputElement>) =>
