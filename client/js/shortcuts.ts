@@ -16,17 +16,7 @@ function ignoreWhenInteracting(
             return;
         }
 
-        // Ignore shortcuts when on input elements.
-        // https://github.com/jamiebuilds/tinykeys/issues/17
-        const active = document.activeElement;
-        const enteringText =
-            active instanceof HTMLElement &&
-            (active.isContentEditable ||
-                active.tagName === 'INPUT' ||
-                active.tagName === 'TEXTAREA');
-        if (!enteringText) {
-            handler(event);
-        }
+        handler(event);
     };
 }
 
