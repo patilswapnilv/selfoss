@@ -22,6 +22,8 @@ final readonly class FeedReader {
         // initialize simplepie feed loader
         if ($cache !== null) {
             $this->simplepie->set_cache($cache);
+        } else {
+            $this->simplepie->enable_cache(false);
         }
 
         $this->simplepie->set_http_client(
